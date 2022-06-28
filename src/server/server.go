@@ -1,29 +1,34 @@
 package server
 
 import (
-    "github.com/gin-gonic/gin"
-
-    "github.com/Go_project/controller"
+	hello "github.com/Go_project/controller/hello"
+	// user "github.com/Go_project/controller/user"
+	"github.com/gin-gonic/gin"
 )
 
 // Init is initialize server
 func Init() {
-    r := router()
-    r.Run()
+	r := router()
+	r.Run()
 }
 
 func router() *gin.Engine {
-    r := gin.Default()
+	r := gin.Default()
 
-    u := r.Group("/users")
-    {
-        ctrl := user.Controller{}
-        u.GET("", ctrl.Index)
-        u.GET("/:id", ctrl.Show)
-        u.POST("", ctrl.Create)
-        u.PUT("/:id", ctrl.Update)
-        u.DELETE("/:id", ctrl.Delete)
-    }
+	// u := r.Group("/users")
+	// {
+	// 	ctrl := user.Controller{}
+	// 	u.GET("", ctrl.Index)
+	// 	u.GET("/:id", ctrl.Show)
+	// 	u.POST("", ctrl.Create)
+	// 	u.PUT("/:id", ctrl.Update)
+	// 	u.DELETE("/:id", ctrl.Delete)
+	// }
 
-    return r
+	h := r.Group("/hello")
+	{
+		ctrl := hello.Controller{}
+		h.GET("", ctrl.HelloIndex)
+	}
+	return r
 }
